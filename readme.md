@@ -1,10 +1,10 @@
 # Snowflake CI-CD Validator
 
-This python code crawls is used to crawl a Snowflake scripts directory for .sql files and execute the statements within an 'EXPLAIN' function within Snowflake. This will identify invalid CREATE statements prior to deployment, therefore minimising failed releases and avoiding lost time.
+This python code is used to crawl a Snowflake scripts directory for .sql files and execute the statements within an 'EXPLAIN' function within Snowflake. This function will produce an execution plan if it is valid - therefore enabling us to identify invalid CREATE statements prior to deployment, minimising failed releases and avoiding lost time.
 
-> This was originally developed to integrate with SchemaChange and Azure DevOps. I have since replaced the 3rd party dependency on SchemaChange with my own code
+> This was originally developed to integrate with SchemaChange and Azure DevOps. I have since replaced the 3rd party dependency on SchemaChange with my own code now that Snowflake has released native Git integration and now that Python Snowpark connections can securely use Public/Private keypair authentication.
 
-As an example, this script can run prior to creation of the build file on the Development instance, to halt any release or promotion until the errors are fixed. Within the failed build, you will be provided with verbose error reporting of all failing SQL statements, not just the first failure. Prior to introducing this code, SchemaChange would fail on the first problem encountered in the release, with no understanding of how many other issues are lurking.
+As an example use case, this script can run prior to creation of the build file on the Development instance, to halt any release or promotion until the errors are fixed. Within the failed build, you will be provided with verbose error reporting of all failing SQL statements, not just the first failure. Prior to introducing this code, SchemaChange would fail on the first problem encountered in the release, with no understanding of how many other issues are lurking.
 
 ## Any change to what I do now?
 
@@ -21,7 +21,7 @@ RSA_KEY_PATH=./COMPANY_dev_rsa_key.p8
 ENVIRONMENT=DEV
 SF_ACCOUNT=SOMETHING.uk-south.azure
 SF_USER=COMPANY_ETL_DEV
-SF_WAREHOUSE=WH_CLEKT_DEV
+SF_WAREHOUSE=WH_COMPANY_DEV
 SF_ROLE=COMPANY_ETL_ROLE
 SF_DATABASE=COMPANY_DEV
 SF_SCHEMA=TEST_SCHEMA

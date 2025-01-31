@@ -1,0 +1,6 @@
+sqlparse
+snowflake-connector-python
+duckdb
+pathlib
+jinja2
+python-dotenv
